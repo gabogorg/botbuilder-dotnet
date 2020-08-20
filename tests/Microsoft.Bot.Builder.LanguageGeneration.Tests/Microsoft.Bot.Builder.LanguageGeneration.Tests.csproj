@@ -91,7 +91,9 @@
     <None Remove="ExceptionExamples\ExpressionFormatError.lg" />
     <None Remove="ExceptionExamples\ErrorLine.lg" />
     <None Remove="MultiLanguage\a.lg" />
-    <None Remove="MultiLanguage\a.en.lg" />
+    <None Remove="MultiLanguage\common.lg" />
+    <None Remove="MultiLanguage\resource.en-us.lg" />
+    <None Remove="MultiLanguage\resource.fr-fr.lg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -330,6 +332,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MultiLanguage\a.en.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MultiLanguage\common.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MultiLanguage\resource.en-us.lg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MultiLanguage\resource.fr-fr.lg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -92,7 +92,7 @@ namespace Microsoft.Bot.Builder.LanguageGeneration.Tests
         }
 
         [Fact]
-        public void MultiLangSampleWioutMultiLangualLG()
+        public void MultiLangSample()
         {
             var localPerFile = new Dictionary<string, Templates>
             {

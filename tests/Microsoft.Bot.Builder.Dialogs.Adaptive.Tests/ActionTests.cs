@@ -244,6 +244,12 @@ namespace Microsoft.Bot.Builder.Dialogs.Adaptive.Tests
         }
 
         [Fact]
+        public async Task Action_NumberInputWithDefaultResponse()
+        {
+            await TestUtils.RunTestScript(_resourceExplorerFixture.ResourceExplorer);
+        }
+
+        [Fact]
         public async Task Action_RepeatDialog()
         {
             await TestUtils.RunTestScript(_resourceExplorerFixture.ResourceExplorer);
@@ -311,6 +317,12 @@ namespace Microsoft.Bot.Builder.Dialogs.Adaptive.Tests
 
         [Fact]
         public async Task Action_TextInputWithValueExpression()
+        {
+            await TestUtils.RunTestScript(_resourceExplorerFixture.ResourceExplorer);
+        }
+
+        [Fact]
+        public async Task Action_ThrowException()
         {
             await TestUtils.RunTestScript(_resourceExplorerFixture.ResourceExplorer);
         }

@@ -11,13 +11,15 @@ namespace Microsoft.BotBuilderSamples.DialogRootBot.Skills
     {
         private const string SkillActionTeamsTaskModule = "TeamsTaskModule";
         private const string SkillActionTeamsCardAction = "TeamsCardAction";
+        private const string SkillActionTeamsConversation = "TeamsConversation";
 
         public override IList<string> GetActions()
         {
             return new List<string>
             {
                 SkillActionTeamsTaskModule,
-                SkillActionTeamsCardAction
+                SkillActionTeamsCardAction,
+                SkillActionTeamsConversation
             };
         }
 
@@ -27,15 +29,22 @@ namespace Microsoft.BotBuilderSamples.DialogRootBot.Skills
 
             if (actionId.Equals(SkillActionTeamsTaskModule, StringComparison.CurrentCultureIgnoreCase))
             {
-                activity = (Activity)Activity.CreateInvokeActivity();
+                activity = (Activity)Activity.CreateEventActivity();
                 activity.Name = SkillActionTeamsTaskModule;
                 return activity;
             }
 
             if (actionId.Equals(SkillActionTeamsCardAction, StringComparison.CurrentCultureIgnoreCase))
             {
-                activity = (Activity)Activity.CreateInvokeActivity();
+                activity = (Activity)Activity.CreateEventActivity();
                 activity.Name = SkillActionTeamsCardAction;
+                return activity;
+            }
+
+            if (actionId.Equals(SkillActionTeamsConversation, StringComparison.CurrentCultureIgnoreCase))
+            {
+                activity = (Activity)Activity.CreateEventActivity();
+                activity.Name = SkillActionTeamsConversation;
                 return activity;
             }
 

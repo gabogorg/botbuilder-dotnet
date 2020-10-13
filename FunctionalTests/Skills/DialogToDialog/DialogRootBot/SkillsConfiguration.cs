@@ -55,6 +55,9 @@ namespace Microsoft.BotBuilderSamples.DialogRootBot
                 case "TeamsSkillBot":
                     skillDefinition = ObjectPath.Assign<TeamsSkill>(new TeamsSkill(), skill);
                     break;
+                case "ProactiveSkillBot":
+                    skillDefinition = ObjectPath.Assign<ProactiveSkill>(new ProactiveSkill(), skill);
+                    break;
                 default:
                     throw new Exception($"Unable to find definition class for {skill.Id}.");
             }

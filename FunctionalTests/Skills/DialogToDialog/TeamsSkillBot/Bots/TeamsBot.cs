@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
@@ -12,109 +11,56 @@ using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.BotBuilderSamples.TeamsSkillBot.Extensions;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.BotBuilderSamples.TeamsSkillBot.Bots
 {
-    public class TeamsBot : TeamsActivityHandler
+    /// <summary>
+    /// Main TeamsBot that starts a skill activity based on an event message.
+    /// </summary>
+    public partial class TeamsBot : TeamsActivityHandler
     {
-        protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        private readonly string _appId;
+        private readonly string _appPassword;
+
+        public TeamsBot(IConfiguration config)
         {
-            // Handle invoke triggers for the skill.
+            _appId = config["MicrosoftAppId"];
+            _appPassword = config["MicrosoftAppPassword"];
+        }
+
+        protected override async Task OnEventActivityAsync(ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
+        {
             switch (turnContext.Activity.Name)
             {
                 case "TeamsTaskModule":
-                {
                     var reply = MessageFactory.Attachment(GetTaskModuleHeroCard());
                     await turnContext.SendActivityAsync(reply, cancellationToken);
-
-                    //var token = await (turnContext.Adapter as SkillAdapterWithErrorHandler).GetBotSkillToken(turnContext);
-
-                    return new InvokeResponse
-                    {
-                        Status = (int)HttpStatusCode.OK,
-                    };
-                }
+                    break;
 
                 case "TeamsCardAction":
-                {
-                    var reply = MessageFactory.Attachment(GetAdaptiveCardWithInvokeAction());
-                    await turnContext.SendActivityAsync(reply, cancellationToken);
+                    var cardInvocationActivityCard = MessageFactory.Attachment(GetAdaptiveCardWithInvokeAction());
+                    await turnContext.SendActivityAsync(cardInvocationActivityCard, cancellationToken);
+                    break;
 
-                    return new InvokeResponse
-                    {
-                        Status = (int)HttpStatusCode.OK,
-                    };
-                }
+                case "TeamsConversation":
+                    await CardActivityAsync(new DelegatingTurnContext<IMessageActivity>(turnContext), false, cancellationToken);
+                    break;
 
                 default:
-                    // Let the base handle it.
-                    return await base.OnInvokeActivityAsync(turnContext, cancellationToken);
+                    await turnContext.SendActivityAsync($"Unknown event name {turnContext.Activity.Name}", cancellationToken: cancellationToken);
+                    break;
             }
         }
 
-        protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        protected override async Task OnTeamsMembersAddedAsync(IList<TeamsChannelAccount> membersAdded, TeamInfo teamInfo, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var reply = MessageFactory.Attachment(GetTaskModuleHeroCard());
-            await turnContext.SendActivityAsync(reply, cancellationToken);
-        }
-
-        protected override async Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
-        {
-            var reply = MessageFactory.Text("OnTeamsTaskModuleFetchAsync TaskModuleRequest: " + JsonConvert.SerializeObject(taskModuleRequest));
-
-            await turnContext.SendActivityAsync(reply, cancellationToken);
-
-            return new TaskModuleResponse
+            foreach (var teamMember in membersAdded)
             {
-                Task = new TaskModuleContinueResponse
-                {
-                    Value = new TaskModuleTaskInfo
-                    {
-                        Card = CreateAdaptiveCardAttachment(),
-                        Height = 200,
-                        Width = 400,
-                        Title = "Adaptive Card: Inputs",
-                    },
-                },
-            };
-        }
-
-        protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
-        {
-            var reply = MessageFactory.Text("OnTeamsTaskModuleSubmitAsync Value: " + JsonConvert.SerializeObject(taskModuleRequest));
-            await turnContext.SendActivityAsync(reply, cancellationToken);
-
-            // Send End of conversation at the end.
-            var activity = new Activity(ActivityTypes.EndOfConversation)
-            {
-                Value = taskModuleRequest.Data,
-                Locale = ((Activity)turnContext.Activity).Locale
-            };
-            await turnContext.SendActivityAsync(activity, cancellationToken);
-
-            return new TaskModuleResponse
-            {
-                Task = new TaskModuleMessageResponse
-                {
-                    Value = "Thanks!",
-                },
-            };
-        }
-
-        protected override async Task<InvokeResponse> OnTeamsCardActionInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
-        {
-            await turnContext.SendActivityAsync(MessageFactory.Text("hello from OnTeamsCardActionInvokeAsync."), cancellationToken);
-
-            // Send End of conversation at the end.
-            var activity = new Activity(ActivityTypes.EndOfConversation)
-            {
-                Locale = ((Activity)turnContext.Activity).Locale
-            };
-            await turnContext.SendActivityAsync(activity, cancellationToken);
-
-            return new InvokeResponse { Status = (int)HttpStatusCode.OK };
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to the team {teamMember.GivenName} {teamMember.Surname}."), cancellationToken);
+            }
         }
 
         private Attachment GetTaskModuleHeroCard()

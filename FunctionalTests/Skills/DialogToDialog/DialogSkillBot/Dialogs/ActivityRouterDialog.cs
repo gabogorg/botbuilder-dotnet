@@ -49,13 +49,14 @@ namespace Microsoft.BotBuilderSamples.DialogSkillBot.Dialogs
         private static SkillDialog CreateEchoSkillDialog(ConversationState conversationState, SkillConversationIdFactoryBase conversationIdFactory, SkillHttpClient skillClient, IConfiguration configuration)
         {
             var botId = configuration.GetSection(MicrosoftAppCredentials.MicrosoftAppIdKey)?.Value;
-            if (string.IsNullOrWhiteSpace(botId))
-            {
-                throw new ArgumentException($"{MicrosoftAppCredentials.MicrosoftAppIdKey} is not in configuration");
-            }
+            
+            //if (string.IsNullOrWhiteSpace(botId))
+            //{
+            //    throw new ArgumentException($"{MicrosoftAppCredentials.MicrosoftAppIdKey} is not in configuration");
+            //}
 
             var skillHostEndpoint = configuration.GetSection("SkillHostEndpoint")?.Value;
-            if (string.IsNullOrWhiteSpace(botId))
+            if (string.IsNullOrWhiteSpace(skillHostEndpoint))
             {
                 throw new ArgumentException("SkillHostEndpoint is not in configuration");
             }

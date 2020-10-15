@@ -287,6 +287,8 @@ Documentation/docs/
 # Azure publish profiles
 *.pubxml
 PublishProfiles/
+**/Properties/ServiceDependencies/
+**/.config
 
 appsettings.local.json
 appsettings.Development.json

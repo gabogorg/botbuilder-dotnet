@@ -7,13 +7,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using Microsoft.BotBuilderSamples.ProactiveSkillBot.Controllers;
 
 namespace Microsoft.BotBuilderSamples.ProactiveSkillBot.Bots
 {
     public class ProactiveBot : ActivityHandler
     {
         // Message to send to users when the bot receives a Conversation Update event
-        private const string WelcomeMessage = "Welcome to the Proactive Bot sample.  Navigate to http://localhost:3978/api/notify to proactively message everyone who has previously messaged this bot.";
+        private const string WelcomeMessage = "Welcome to the Proactive Bot sample.  Navigate to {0}api/notify to proactively message everyone who has previously messaged this bot.";
 
         // Dependency injected dictionary for storing ConversationReference objects used in NotifyController to proactively message users
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
@@ -37,7 +38,7 @@ namespace Microsoft.BotBuilderSamples.ProactiveSkillBot.Bots
                 // Greet anyone that was not the target (recipient) of this message.
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text(WelcomeMessage), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text(string.Format(WelcomeMessage, BotController.ServerUrl)), cancellationToken);
                 }
             }
         }
@@ -47,7 +48,7 @@ namespace Microsoft.BotBuilderSamples.ProactiveSkillBot.Bots
             AddConversationReference(turnContext.Activity as Activity);
 
             // Echo back what the user said
-            await turnContext.SendActivityAsync(MessageFactory.Text($"You sent '{turnContext.Activity.Text}'"), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text($"You sent '{turnContext.Activity.Text}'. \r\n Go to {BotController.ServerUrl}api/notify to send a proactive message."), cancellationToken);
         }
 
         private void AddConversationReference(Activity activity)

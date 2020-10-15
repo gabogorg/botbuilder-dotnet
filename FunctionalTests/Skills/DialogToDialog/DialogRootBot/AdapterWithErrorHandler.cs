@@ -58,6 +58,9 @@ namespace Microsoft.BotBuilderSamples.DialogRootBot
                 var errorMessage = MessageFactory.Text(errorMessageText, errorMessageText, InputHints.IgnoringInput);
                 await turnContext.SendActivityAsync(errorMessage);
 
+                await turnContext.SendActivityAsync($"Exception: {exception.Message}");
+                await turnContext.SendActivityAsync(exception.ToString());
+
                 errorMessageText = "To continue to run this bot, please fix the bot source code.";
                 errorMessage = MessageFactory.Text(errorMessageText, errorMessageText, InputHints.ExpectingInput);
                 await turnContext.SendActivityAsync(errorMessage);

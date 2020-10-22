@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.7",
+  "version": "1.0.0",
+  "id": "TODO: Your bot's AppId here",
+  "packageName": "net.azurewebsites.ggdialogrootbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://dev.botframework.com",
+    "termsOfUseUrl": "https://dev.botframework.com"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "GGDialogRootBot",
+    "full": "Dialog Root Bot Tests"
+  },
+  "description": {
+    "short": "A bot for testing skills in teams",
+    "full": "Bot for testing skills in teams"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "TODO: Your bot's AppId here",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": true,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}

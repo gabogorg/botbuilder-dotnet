@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Testing;
+using Microsoft.Bot.Builder.Dialogs.Debugging;
 using Microsoft.Bot.Builder.Dialogs.Declarative.Resources;
 using Microsoft.Extensions.Configuration;
 
@@ -27,6 +28,8 @@ namespace Microsoft.Bot.Builder.Dialogs.Adaptive.Tests
             var script = resourceExplorer.LoadType<TestScript>(resourceId ?? $"{testName}.test.dialog");
             script.Configuration = configuration ?? new ConfigurationBuilder().AddInMemoryCollection().Build();
             script.Description = script.Description ?? resourceId;
+            var debugAdapter = script.DefaultTestAdapter(resourceExplorer);
+            debugAdapter.UseDebugger(0);
             await script.ExecuteAsync(testName: testName, resourceExplorer: resourceExplorer, middlweare: middlweare).ConfigureAwait(false);
         }
 

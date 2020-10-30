@@ -47,6 +47,7 @@ namespace Microsoft.BotFramework.Composer.Core
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
+            await turnContext.SendActivityAsync("hello").ConfigureAwait(false);
             AdaptiveDialog rootDialog = (AdaptiveDialog)this.dialogManager.RootDialog;
             if (turnContext.TurnState.Get<IIdentity>(BotAdapter.BotIdentityKey) is ClaimsIdentity claimIdentity && SkillValidation.IsSkillClaim(claimIdentity.Claims))
             {

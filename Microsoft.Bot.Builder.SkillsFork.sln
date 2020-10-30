@@ -270,6 +270,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{111761F4-1928-4813-B19A-7FA4D9AE098C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{CB0B6AF0-E9BA-4EC8-A449-35D3F395AC13}"
+	ProjectSection(SolutionItems) = preProject
+		FunctionalTests\Samples\ComposerTodoSample\settings\appsettings.json = FunctionalTests\Samples\ComposerTodoSample\settings\appsettings.json
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.BotFramework.Composer.Core", "FunctionalTests\Samples\ComposerTodoSample\runtime\core\Microsoft.BotFramework.Composer.Core.csproj", "{633EDBF2-9A4F-471C-8175-E0AF5EFF089A}"
 EndProject
@@ -278,6 +281,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.BotFramework.Composer.Tests", "FunctionalTests\Samples\ComposerTodoSample\runtime\tests\Microsoft.BotFramework.Composer.Tests.csproj", "{37DF69D6-4839-4767-AA63-D18008A42F46}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.BotFramework.Composer.WebApp", "FunctionalTests\Samples\ComposerTodoSample\runtime\azurewebapp\Microsoft.BotFramework.Composer.WebApp.csproj", "{CFC03586-D874-4BF6-B90D-27A5AD308B10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Composer", "Composer", "{C141B474-BE1D-4E7F-89FF-66211A830588}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".vscode", ".vscode", "{1E8E3D58-4778-42F4-8F8C-17F784C38419}"
+	ProjectSection(SolutionItems) = preProject
+		FunctionalTests\Samples\ComposerTodoSample\.vscode\launch.json = FunctionalTests\Samples\ComposerTodoSample\.vscode\launch.json
+		FunctionalTests\Samples\ComposerTodoSample\.vscode\tasks.json = FunctionalTests\Samples\ComposerTodoSample\.vscode\tasks.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1163,6 +1174,8 @@ Global
 		{395E6E96-F644-4D82-A9B7-97877F289E8D} = {64F89D51-9C4F-45AE-865F-0BCD4E30E660}
 		{37DF69D6-4839-4767-AA63-D18008A42F46} = {64F89D51-9C4F-45AE-865F-0BCD4E30E660}
 		{CFC03586-D874-4BF6-B90D-27A5AD308B10} = {64F89D51-9C4F-45AE-865F-0BCD4E30E660}
+		{C141B474-BE1D-4E7F-89FF-66211A830588} = {DCD2CEDB-3B23-4DB8-A798-F0D5CD4E168E}
+		{1E8E3D58-4778-42F4-8F8C-17F784C38419} = {9AA41CCA-5388-43F9-9D8F-97DE73D9023C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7173C9F3-A7F9-496E-9078-9156E35D6E16}

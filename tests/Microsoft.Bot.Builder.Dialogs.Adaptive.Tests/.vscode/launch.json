@@ -1,21 +1,35 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
     {
-        "type": "json",
-        "request": "launch",
-        "name": "Debug Bot (.NET Core)",
-        "command": "dotnet",
-        "args": [
-            "test",
-            "--no-build",
-            "--",
-            "--debugport",
-            "0"
-        ]
-    }
-    ]
+      "type": "json",
+      "request": "launch",
+      "name": "Debug Bot (.NET Core)",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "--no-build",
+        "--",
+        "--debugport",
+        "0"
+      ]
+    },
+    {
+      // Use this configuration to debug adaptive assets.
+      // Note: requires  to be installed.
+      "name": "Adaptive debugger Launch",
+      "type": "json",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "--no-build",
+        "${workspaceFolder}/Microsoft.Bot.Builder.Dialogs.Adaptive.Tests.csproj",
+      ]
+    },
+  ]
 }

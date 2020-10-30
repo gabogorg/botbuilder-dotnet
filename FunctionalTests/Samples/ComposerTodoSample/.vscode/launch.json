@@ -5,28 +5,29 @@
   "version": "0.2.0",
   "configurations": [
     {
-      // Note: this doesn't work yet, need to figure out what's missing.
-      "name": "Adaptive debugger Attach",
-      "type": "json",
-      "request": "attach",
-      "debugServer": 4712
-    },
-    {
       // Use this configuration to debug adaptive assets.
       // Note: requires  to be installed.
-      "name": "Adaptive debugger Launch",
+      "name": "Composer Adaptive debugger Launch",
       "type": "json",
       "request": "launch",
+      "preLaunchTask": "build",
       "command": "dotnet",
       "args": [
         "run",
         "--no-build",
         "--project",
         "${workspaceFolder}/runtime/azurewebapp/Microsoft.BotFramework.Composer.WebApp.csproj",
-        "--",
         "--debugport",
         "0"
       ]
+    },
+    {
+      // Note: this doesn't work yet, need to figure out what's missing.
+      "name": "Adaptive debugger Attach",
+      "type": "json",
+      "request": "attach",
+      "debugServer": 4712,
+      "host": "127.0.0.1"
     },
     {
       // Use this configuration to launch and debug the bot C# code.
@@ -48,6 +49,12 @@
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"
       }
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
     }
   ]
 }

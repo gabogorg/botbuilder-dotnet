@@ -94,7 +94,7 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
               .UseBotState(userState, conversationState)
               .Use(new RegisterClassMiddleware<IConfiguration>(Configuration))
               .Use(telemetryInitializerMiddleware)
-              .UseDebugger(0);
+              .UseDebugger(Configuration.GetValue("debugport", 0));
 
             // Configure Middlewares
             ConfigureTranscriptLoggerMiddleware(adapter, settings);

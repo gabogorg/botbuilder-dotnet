@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -94,7 +94,7 @@ namespace Microsoft.BotFramework.Composer.WebAppTemplates
               .UseBotState(userState, conversationState)
               .Use(new RegisterClassMiddleware<IConfiguration>(Configuration))
               .Use(telemetryInitializerMiddleware)
-              .UseDebugger(3977);
+              .UseDebugger(0);
 
             // Configure Middlewares
             ConfigureTranscriptLoggerMiddleware(adapter, settings);

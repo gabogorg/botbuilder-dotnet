@@ -1,0 +1,53 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Note: this doesn't work yet, need to figure out what's missing.
+      "name": "Adaptive debugger Attach",
+      "type": "json",
+      "request": "attach",
+      "debugServer": 4712
+    },
+    {
+      // Use this configuration to debug adaptive assets.
+      // Note: requires  to be installed.
+      "name": "Adaptive debugger Launch",
+      "type": "json",
+      "request": "launch",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--no-build",
+        "--project",
+        "${workspaceFolder}/runtime/azurewebapp/Microsoft.BotFramework.Composer.WebApp.csproj",
+        "--",
+        "--debugport",
+        "0"
+      ]
+    },
+    {
+      // Use this configuration to launch and debug the bot C# code.
+      "name": ".NET Core Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/runtime/azurewebapp/bin/Debug/netcoreapp3.1/Microsoft.BotFramework.Composer.WebApp.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/runtime/azurewebapp",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    }
+  ]
+}

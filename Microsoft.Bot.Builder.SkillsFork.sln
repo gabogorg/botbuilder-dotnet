@@ -294,6 +294,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".vscode", ".vscode", "{1E8E
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Composer", "Composer", "{399DAB0E-088A-4EE3-BE03-10187C8F91E4}"
+	ProjectSection(SolutionItems) = preProject
+		FunctionalTests\SkillsTests\Skills\Composer\Directory.Build.props = FunctionalTests\SkillsTests\Skills\Composer\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EchoSkillBotComposer", "EchoSkillBotComposer", "{0576437A-0F7E-4759-94F2-B7AC923F99BB}"
 EndProject

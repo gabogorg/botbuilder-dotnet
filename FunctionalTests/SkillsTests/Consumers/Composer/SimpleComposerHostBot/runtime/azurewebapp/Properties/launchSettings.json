@@ -13,9 +13,8 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "skillx:EchoSkillBot:endpointUrl": "http://localhost:39800/api/messagesXXXX",
-        "MyConfigValue": "From launchsettings",
-        "skill": "{ 'EchoSkillBot': {} }"
+        "skill__EchoSkillBot__msAppId": "",
+        "skill__EchoSkillBot__endpointUrl": "http://localhost:39800/api/messages"
       },
       "BotProject": {
         "commandName": "Project",

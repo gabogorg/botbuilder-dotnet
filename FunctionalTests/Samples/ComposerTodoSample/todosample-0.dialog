@@ -99,7 +99,8 @@
           "dialog": "deletetodo",
           "$designer": {
             "id": "978613"
-          }
+          },
+          "activityProcessed": true
         }
       ],
       "intent": "DeleteIntent"
@@ -112,7 +113,8 @@
       "actions": [
         {
           "$kind": "Microsoft.BeginDialog",
-          "dialog": "cleartodos"
+          "dialog": "cleartodos",
+          "activityProcessed": true
         }
       ],
       "intent": "ClearIntent"

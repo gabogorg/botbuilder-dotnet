@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 
-namespace Microsoft.BotBuilderSamples.EchoSkillBot.Authentication
+namespace Microsoft.BotFrameworkFunctionalTests.EchoSkillBot.Authentication
 {
     /// <summary>
     /// Sample claims validator that loads an allowed list from configuration if present
@@ -19,6 +19,10 @@ namespace Microsoft.BotBuilderSamples.EchoSkillBot.Authentication
         private const string ConfigKey = "AllowedCallers";
         private readonly List<string> _allowedCallers;
 
+        /// <summary>
+        /// Loads the appIds for the configured callers. Only allows access to callers it has configured.
+        /// </summary>
+        /// <param name="config">The list of configured callers.</param>
         public AllowedCallersClaimsValidator(IConfiguration config)
         {
             if (config == null)
@@ -41,6 +45,11 @@ namespace Microsoft.BotBuilderSamples.EchoSkillBot.Authentication
             _allowedCallers = new List<string>(appsList);
         }
 
+        /// <summary>
+        /// Checks that the appId claim in the skill request is in the list of callers configured for this bot.
+        /// </summary>
+        /// <param name="claims">The list of claims to validate.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         public override Task ValidateClaimsAsync(IList<Claim> claims)
         {
             // If _allowedCallers contains an "*", we allow all callers.

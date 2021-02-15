@@ -7,23 +7,37 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.BotFramework;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.BotBuilderSamples.EchoSkillBot.Authentication;
-using Microsoft.BotBuilderSamples.EchoSkillBot.Bots;
+using Microsoft.BotFrameworkFunctionalTests.EchoSkillBot.Authentication;
+using Microsoft.BotFrameworkFunctionalTests.EchoSkillBot.Bots;
+using Microsoft.BotFrameworkFunctionalTests.EchoSkillBot.OAuth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Microsoft.BotBuilderSamples.EchoSkillBot
+namespace Microsoft.BotFrameworkFunctionalTests.EchoSkillBot
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
+        public Startup(IConfiguration config)
+        {
+            Configuration = config;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">Method to add services to the container.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
 
             // Configure credentials
             services.AddSingleton<ICredentialProvider, ConfigurationCredentialProvider>();
+
+            services.AddSingleton<LoginDialog>();
+            services.AddSingleton<ConversationState>((s) => new ConversationState(new MemoryStorage()));
 
             // Register AuthConfiguration to enable custom claim validation.
             services.AddSingleton(sp => new AuthenticationConfiguration { ClaimsValidator = new AllowedCallersClaimsValidator(sp.GetService<IConfiguration>()) });
@@ -33,9 +47,19 @@ namespace Microsoft.BotBuilderSamples.EchoSkillBot
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, EchoBot>();
+
+            if (!string.IsNullOrEmpty(Configuration["ChannelService"]))
+            {
+                // Register a ConfigurationChannelProvider -- this is only for Azure Gov.
+                services.AddSingleton<IChannelProvider, ConfigurationChannelProvider>();
+            }
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The application request pipeline to be configured.</param>
+        /// <param name="env">The web hosting environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

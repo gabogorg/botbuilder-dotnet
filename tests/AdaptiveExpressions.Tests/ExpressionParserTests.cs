@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
+using AdaptiveExpressions.BuiltinFunctions;
 using AdaptiveExpressions.Memory;
 using Microsoft.Recognizers.Text.DataTypes.TimexExpression;
 using Newtonsoft.Json.Linq;
@@ -351,6 +352,7 @@ namespace AdaptiveExpressions.Tests
             Test("sentenceCase('aBC', 'fr-FR')", "Abc"),
             Test("titleCase('a', 'en-US')", "A"),
             Test("titleCase('abc dEF', 'en-US')", "Abc Def"),
+            Test("titleCase('today, February 17th', 'en-US')", "Today, February 17th"),
             #endregion
 
             #region accessor and element
@@ -803,6 +805,11 @@ namespace AdaptiveExpressions.Tests
             Test("round(3.51)", 4),
             Test("round(3.55, 1)", 3.6),
             Test("round(3.12134, 3)", 3.121),
+            Test("abs(3.12134)", 3.12134),
+            Test("abs(-3.12134)", 3.12134),
+            Test("abs(0)", 0),
+            Test("sqrt(9)", 3),
+            Test("sqrt(0)", 0),
             #endregion
 
             #region  Date and time function test
@@ -1039,6 +1046,14 @@ namespace AdaptiveExpressions.Tests
             Test("flatten(createArray(1,createArray(2),createArray(createArray(3, 4), createArray(5,6))))", new List<object> { 1, 2, 3, 4, 5, 6 }),
             Test("flatten(createArray(1,createArray(2),createArray(createArray(3, 4), createArray(5,6))), 1)", new List<object> { 1, 2, new List<object>() { 3, 4 }, new List<object>() { 5, 6 } }),
             Test("unique(createArray(1, 5, 1))", new List<object>() { 1, 5 }),
+            Test("any(createArray(1, 'cool'), item, isInteger(item))", true),
+            Test("any(createArray('first', 'cool'), item => isInteger(item))", false),
+            Test("all(createArray(1, 'cool'), item, isInteger(item))", false),
+            Test("all(createArray(1, 2), item => isInteger(item))", true),
+            Test("any(dialog, item, item.key == 'title')", true),
+            Test("any(dialog, item, isInteger(item.value))", true),
+            Test("all(dialog, item, item.key == 'title')", false),
+            Test("all(dialog, item, isInteger(item.value))", false),
             #endregion
 
             #region  Object manipulation and construction functions
@@ -1149,6 +1164,11 @@ namespace AdaptiveExpressions.Tests
             #region TriggerTree Tests
             Test("ignore(true)", true),
             #endregion
+
+            #region StringOrValue
+            Test("stringOrValue('${one}')", 1.0),
+            Test("stringOrValue('${one} item')", "1 item"),
+            #endregion
         };
 
         public static IEnumerable<object[]> DataForThreadLocale => new[]
@@ -1221,9 +1241,9 @@ namespace AdaptiveExpressions.Tests
         [MemberData(nameof(DataForThreadLocale))]
         public void EvaluateWithLocale(string input, object expected, HashSet<string> expectedRefs)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var parsed = Expression.Parse(input);
             Assert.NotNull(parsed);
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var opts = new Options() { Locale = "fr-FR" };
             var (actual, msg) = parsed.TryEvaluate(scopeForThreadLocale, opts);
             Assert.Null(msg);
@@ -1438,6 +1458,18 @@ namespace AdaptiveExpressions.Tests
             // null is also the valid value
             (value, error) = Expression.Parse("b").TryEvaluate(sM);
             Assert.Null(value);
+        }
+
+        [Fact]
+        public void TestNumericEvaluator()
+        {
+            var functionName = "Math.sum";
+            Expression.Functions.Add(
+                functionName,
+                new NumericEvaluator(functionName, (args) => (int)args[0] + (int)args[1]));
+            var (result, error) = Expression.Parse("Math.sum(1, 2, 3)").TryEvaluate(null);
+            Assert.Equal(6, result);
+            Assert.Null(error);
         }
 
         private void AssertResult<T>(string text, T expected)

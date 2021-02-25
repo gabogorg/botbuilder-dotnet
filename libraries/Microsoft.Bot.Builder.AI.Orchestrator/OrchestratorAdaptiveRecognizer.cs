@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,6 @@ using AdaptiveExpressions.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Adaptive.Recognizers;
 using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Bot.Schema;
 using Microsoft.BotFramework.Orchestrator;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -23,7 +23,7 @@ namespace Microsoft.Bot.Builder.AI.Orchestrator
     /// <summary>
     /// Class that represents an adaptive Orchestrator recognizer.
     /// </summary>
-    public class OrchestratorAdaptiveRecognizer : Recognizer
+    public class OrchestratorAdaptiveRecognizer : AdaptiveRecognizer
     {
         /// <summary>
         /// The Kind name for this recognizer.
@@ -37,9 +37,9 @@ namespace Microsoft.Bot.Builder.AI.Orchestrator
         public const string ResultProperty = "result";
 
         private const float UnknownIntentFilterScore = 0.4F;
-        private static BotFramework.Orchestrator.Orchestrator orchestrator = null;
-        private string _modelPath;
-        private string _snapshotPath;
+        private static ConcurrentDictionary<string, BotFramework.Orchestrator.Orchestrator> orchestratorMap = new ConcurrentDictionary<string, BotFramework.Orchestrator.Orchestrator>();
+        private string _modelFolder;
+        private string _snapshotFile;
         private ILabelResolver _resolver = null;
 
         /// <summary>
@@ -56,24 +56,24 @@ namespace Microsoft.Bot.Builder.AI.Orchestrator
         /// <summary>
         /// Initializes a new instance of the <see cref="OrchestratorAdaptiveRecognizer"/> class.
         /// </summary>
-        /// <param name="modelPath">Path to NLR model.</param>
-        /// <param name="snapshotPath">Path to snapshot.</param>
+        /// <param name="modelFolder">Specifies the base model folder.</param>
+        /// <param name="snapshotFile">Specifies full path to the snapshot file.</param>
         /// <param name="resolver">Label resolver.</param>
-        public OrchestratorAdaptiveRecognizer(string modelPath, string snapshotPath, ILabelResolver resolver = null)
+        public OrchestratorAdaptiveRecognizer(string modelFolder, string snapshotFile, ILabelResolver resolver = null)
         {
             _resolver = resolver;
-            if (modelPath == null)
+            if (modelFolder == null)
             {
-                throw new ArgumentNullException($"Missing `ModelPath` information.");
+                throw new ArgumentNullException($"Missing `ModelFolder` information.");
             }
 
-            if (snapshotPath == null)
+            if (snapshotFile == null)
             {
-                throw new ArgumentNullException($"Missing `SnapshotPath` information.");
+                throw new ArgumentNullException($"Missing `SnapshotFile` information.");
             }
 
-            _modelPath = modelPath;
-            _snapshotPath = snapshotPath;
+            _modelFolder = modelFolder;
+            _snapshotFile = snapshotFile;
             InitializeModel();
         }
 
@@ -83,8 +83,8 @@ namespace Microsoft.Bot.Builder.AI.Orchestrator
         /// <value>
         /// Model path.
         /// </value>
-        [JsonProperty("modelPath")]
-        public StringExpression ModelPath { get; set; } = "=settings.orchestrator.modelPath";
+        [JsonProperty("modelFolder")]
+        public StringExpression ModelFolder { get; set; } = "=settings.orchestrator.modelFolder";
 
         /// <summary>
         /// Gets or sets the full path to Orchestrator snapshot file to use.
@@ -92,8 +92,8 @@ namespace Microsoft.Bot.Builder.AI.Orchestrator
         /// <value>
         /// Snapshot path.
         /// </value>
-        [JsonProperty("snapshotPath")]
-        public StringExpression SnapshotPath { get; set; } = "=settings.orchestrator.snapshotPath";
+        [JsonProperty("snapshotFile")]
+        public StringExpression SnapshotFile { get; set; } = "=settings.orchestrator.snapshotFile";
 
         /// <summary>
         /// Gets or sets an external entity recognizer.
@@ -135,8 +135,8 @@ namespace Microsoft.Bot.Builder.AI.Orchestrator
             var text = activity.Text ?? string.Empty;
             var detectAmbiguity = DetectAmbiguousIntents.GetValue(dc.State);
 
-            _modelPath = ModelPath.GetValue(dc.State);
-            _snapshotPath = SnapshotPath.GetValue(dc.State);
+            _modelFolder = ModelFolder.GetValue(dc.State);
+            _snapshotFile = SnapshotFile.GetValue(dc.State);
 
             InitializeModel();
 
@@ -216,50 +216,52 @@ namespace Microsoft.Bot.Builder.AI.Orchestrator
                 recognizerResult.Intents.Add(NoneIntent, new IntentScore() { Score = 1.0 });
             }
 
-            await dc.Context.TraceActivityAsync(nameof(OrchestratorAdaptiveRecognizer), JObject.FromObject(recognizerResult), nameof(OrchestratorAdaptiveRecognizer), "Orchestrator Recognition ", cancellationToken).ConfigureAwait(false);
-            TrackRecognizerResult(dc, nameof(OrchestratorAdaptiveRecognizer), FillRecognizerResultTelemetryProperties(recognizerResult, telemetryProperties), telemetryMetrics);
+            await dc.Context.TraceActivityAsync($"{nameof(OrchestratorAdaptiveRecognizer)}Result", JObject.FromObject(recognizerResult), nameof(OrchestratorAdaptiveRecognizer), "Orchestrator Recognition", cancellationToken).ConfigureAwait(false);
+            TrackRecognizerResult(dc, $"{nameof(OrchestratorAdaptiveRecognizer)}Result", FillRecognizerResultTelemetryProperties(recognizerResult, telemetryProperties, dc), telemetryMetrics);
 
             return recognizerResult;
         }
 
         private void InitializeModel()
         {
-            if (_modelPath == null)
+            if (_modelFolder == null)
             {
-                throw new ArgumentNullException($"Missing `ModelPath` information.");
+                throw new ArgumentNullException($"Missing `ModelFolder` information.");
             }
 
-            if (_snapshotPath == null)
+            if (_snapshotFile == null)
             {
-                throw new ArgumentNullException($"Missing `ShapshotPath` information.");
+                throw new ArgumentNullException($"Missing `SnapshotFile` information.");
             }
 
-            if (orchestrator == null && _resolver == null)
+            if (_resolver != null)
             {
-                var fullModelPath = Path.GetFullPath(PathUtils.NormalizePath(_modelPath));
+                return;
+            }
 
+            var fullModelFolder = Path.GetFullPath(PathUtils.NormalizePath(_modelFolder));
+
+            var orchestrator = orchestratorMap.GetOrAdd(fullModelFolder, path =>
+            {
                 // Create Orchestrator
                 try
                 {
-                    orchestrator = new BotFramework.Orchestrator.Orchestrator(fullModelPath);
+                    return new BotFramework.Orchestrator.Orchestrator(path);
                 }
                 catch (Exception ex)
                 {
                     throw new InvalidOperationException("Failed to find or load Model", ex);
                 }
-            }
+            });
 
-            if (_resolver == null)
-            {
-                var fullSnapShotPath = Path.GetFullPath(PathUtils.NormalizePath(_snapshotPath));
+            var fullSnapShotFile = Path.GetFullPath(PathUtils.NormalizePath(_snapshotFile));
 
-                // Load the snapshot
-                string content = File.ReadAllText(fullSnapShotPath);
-                byte[] snapShotByteArray = Encoding.UTF8.GetBytes(content);
+            // Load the snapshot
+            string content = File.ReadAllText(fullSnapShotFile);
+            byte[] snapShotByteArray = Encoding.UTF8.GetBytes(content);
 
-                // Create label resolver
-                _resolver = orchestrator.CreateLabelResolver(snapShotByteArray);
-            }
+            // Create label resolver
+            _resolver = orchestrator.CreateLabelResolver(snapShotByteArray);
         }
     }
 }

@@ -180,7 +180,7 @@ namespace Microsoft.Bot.Builder.Dialogs.Adaptive.Input
                 throw new ArgumentException($"{nameof(options)} cannot be a cancellation token");
             }
 
-            if (this.Disabled != null && this.Disabled.GetValue(dc.State) == true)
+            if (Disabled != null && Disabled.GetValue(dc.State))
             {
                 return await dc.EndDialogAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
             }
@@ -473,7 +473,10 @@ namespace Microsoft.Bot.Builder.Dialogs.Adaptive.Input
                 msg = await this.Prompt.BindAsync(dc, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
 
-            msg.InputHint = InputHints.ExpectingInput;
+            if (string.IsNullOrEmpty(msg?.InputHint))
+            {
+                msg.InputHint = InputHints.ExpectingInput;
+            }
 
             var properties = new Dictionary<string, string>()
             {

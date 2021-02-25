@@ -47,8 +47,6 @@ namespace Microsoft.Bot.Builder
     /// <seealso cref="IMiddleware"/>h
     public class BotFrameworkAdapter : BotAdapter, IAdapterIntegration, IExtendedUserTokenProvider, IConnectorClientBuilder
     {
-        internal const string InvokeResponseKey = "BotFrameworkAdapter.InvokeResponse";
-
         private static readonly HttpClient DefaultHttpClient = new HttpClient();
 
         private readonly HttpClient _httpClient;
@@ -353,19 +351,6 @@ namespace Microsoft.Bot.Builder
 
                 // Add audience to TurnContext.TurnState
                 context.TurnState.Add(OAuthScopeKey, audience);
-
-                // If we receive a valid app id in the incoming token claims, add the 
-                // channel service URL to the trusted services list so we can send messages back.
-                // the service URL for skills is trusted because it is applied by the SkillHandler based on the original request
-                // received by the root bot
-                var appIdFromClaims = JwtTokenValidation.GetAppIdFromClaims(claimsIdentity.Claims);
-                if (!string.IsNullOrEmpty(appIdFromClaims))
-                {
-                    if (SkillValidation.IsSkillClaim(claimsIdentity.Claims) || await CredentialProvider.IsValidAppIdAsync(appIdFromClaims).ConfigureAwait(false))
-                    {
-                        AppCredentials.TrustServiceUrl(reference.ServiceUrl);
-                    }
-                }
 
                 using (var connectorClient = await CreateConnectorClientAsync(reference.ServiceUrl, claimsIdentity, audience).ConfigureAwait(false))
                 {

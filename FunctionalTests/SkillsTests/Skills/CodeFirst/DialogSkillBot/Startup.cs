@@ -9,7 +9,6 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.Integration.AspNet.Core.Skills;
 using Microsoft.Bot.Builder.Skills;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.BotBuilderSamples.DialogSkillBot.Authentication;
 using Microsoft.BotBuilderSamples.DialogSkillBot.Bots;
 using Microsoft.BotBuilderSamples.DialogSkillBot.Dialogs;
 using Microsoft.Extensions.Configuration;
@@ -37,7 +36,10 @@ namespace Microsoft.BotBuilderSamples.DialogSkillBot
             services.AddSingleton<ICredentialProvider, ConfigurationCredentialProvider>();
 
             // Register AuthConfiguration to enable custom claim validation.
-            services.AddSingleton(sp => new AuthenticationConfiguration { ClaimsValidator = new AllowedCallersClaimsValidator(sp.GetService<IConfiguration>()) });
+            services.AddSingleton(sp => new AuthenticationConfiguration
+            {
+                ClaimsValidator = new AllowedCallersClaimsValidator(sp.GetService<IConfiguration>().GetSection("AllowedCallers").Get<string[]>())
+            });
             
             // Register the Bot Framework Adapter with error handling enabled.
             // Note: some classes use the base BotAdapter so we add an extra registration that pulls the same instance.

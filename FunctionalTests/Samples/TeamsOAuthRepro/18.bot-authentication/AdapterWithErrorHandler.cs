@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
-using AuthenticationBot;
+using System.Collections.Generic;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.BotFramework;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
@@ -16,7 +16,7 @@ namespace Microsoft.BotBuilderSamples
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {
         public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
-            : base(configuration: configuration, new ConfigurationCredentialProvider(configuration), logger: logger, authConfig: new AuthenticationConfiguration() { ClaimsValidator = new AllowedCallersClaimsValidator() })
+            : base(configuration: configuration, new ConfigurationCredentialProvider(configuration), logger: logger, authConfig: new AuthenticationConfiguration { ClaimsValidator = new AllowedCallersClaimsValidator(new List<string> { "*" }) })
         {
             OnTurnError = async (turnContext, exception) =>
             {

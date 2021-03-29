@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.Integration.AspNet.Core.Skills;
 using Microsoft.Bot.Builder.Integration.Runtime.Extensions;
 using Microsoft.Bot.Builder.Integration.Runtime.Settings;
 using Microsoft.Bot.Builder.Skills;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -60,22 +62,24 @@ namespace Microsoft.Bot.Builder.Runtime.Tests.Extensions
         {
             // Setup
             IServiceCollection services = new ServiceCollection();
-            var skillSettings = settings as SkillSettings;
 
             services.AddSingleton<IStorage, MemoryStorage>();
-            services.AddSingleton<ICredentialProvider, SimpleCredentialProvider>();
-            services.AddSingleton<BotAdapter, BotFrameworkAdapter>();
+            services.AddSingleton<SkillConversationIdFactoryBase, SkillConversationIdFactory>();
+            services.AddSingleton(sp => BotFrameworkAuthenticationFactory.Create());
+            services.AddSingleton<BotAdapter, CloudAdapter>();
             services.AddSingleton<IBot, ActivityHandler>();
 
+            var skillSettings = settings as SkillSettings;
+            IConfiguration configuration = new ConfigurationBuilder().AddRuntimeSettings(new RuntimeSettings() { Skills = skillSettings }).Build();
+
             // Test
-            services.AddBotRuntimeSkills(skillSettings);
+            services.AddBotRuntimeSkills(configuration);
 
             // Assert
             var provider = services.BuildServiceProvider();
 
             Assertions.AssertService<SkillConversationIdFactoryBase, SkillConversationIdFactory>(services, provider, ServiceLifetime.Singleton);
-            Assertions.AssertService<BotFrameworkClient, SkillHttpClient>(services, provider, ServiceLifetime.Transient);
-            Assertions.AssertService<ChannelServiceHandler, SkillHandler>(services, provider, ServiceLifetime.Singleton);
+            Assertions.AssertService<ChannelServiceHandlerBase, CloudSkillHandler>(services, provider, ServiceLifetime.Singleton);
             Assertions.AssertService<AuthenticationConfiguration>(
                 services,
                 provider,

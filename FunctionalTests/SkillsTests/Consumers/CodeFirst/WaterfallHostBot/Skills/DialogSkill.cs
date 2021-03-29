@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.BotBuilderSamples.DialogRootBot.Skills
+namespace Microsoft.BotFrameworkFunctionalTests.WaterfallHostBot.Skills
 {
     public class DialogSkill : SkillDefinition
     {

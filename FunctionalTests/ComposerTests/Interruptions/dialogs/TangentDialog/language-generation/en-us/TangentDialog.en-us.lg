@@ -1,0 +1,6 @@
+[import](common.lg)
+
+# TextInput_Prompt_9CiOIR()
+[Activity
+    Text = Say something
+]

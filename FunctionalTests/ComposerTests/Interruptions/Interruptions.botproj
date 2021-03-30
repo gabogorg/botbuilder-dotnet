@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/main/Composer/packages/server/schemas/botproject.schema",
+  "name": "Interruptions",
+  "skills": {
+    "waterfallSkillBotDotNet": {
+      "manifest": "http://localhost:35420/manifests/waterfallskillbot-manifest-1.0.json",
+      "remote": true,
+      "endpointName": "default"
+    },
+    "echoSkillBotDotNet": {
+      "manifest": "http://localhost:35400/manifests/echoskillbot-manifest-1.0.json",
+      "remote": true,
+      "endpointName": "default"
+    }
+  }
+}

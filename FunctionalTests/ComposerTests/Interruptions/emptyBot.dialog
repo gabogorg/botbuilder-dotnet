@@ -1,0 +1,155 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "$designer": {
+      "name": "Interruptions",
+      "description": "",
+      "id": "ccfaI3"
+    }
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "376720"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.Foreach",
+          "$designer": {
+            "id": "518944",
+            "name": "Loop: for each item"
+          },
+          "itemsProperty": "turn.Activity.membersAdded",
+          "actions": [
+            {
+              "$kind": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "641773",
+                "name": "Branch: if/else"
+              },
+              "condition": "string(dialog.foreach.value.id) != string(turn.Activity.Recipient.id)",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "859266",
+                    "name": "Send a response"
+                  },
+                  "activity": "${SendActivity_Welcome()}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "5Ha3Tk",
+        "name": "Skill"
+      },
+      "intent": "Skill",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginSkill",
+          "$designer": {
+            "id": "v0SSAi"
+          },
+          "activityProcessed": true,
+          "botId": "=settings.MicrosoftAppId",
+          "skillHostEndpoint": "=settings.skillHostEndpoint",
+          "connectionName": "=settings.connectionName",
+          "allowInterruptions": true,
+          "skillEndpoint": "=settings.skill['waterfallSkillBotDotNet'].endpointUrl",
+          "skillAppId": "=settings.skill['waterfallSkillBotDotNet'].msAppId",
+          "activity": "${BeginSkill_Activity_v0SSAi()}"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "CFPzjV",
+        "name": "TangentDialog"
+      },
+      "intent": "TangentDialog",
+      "actions": [
+        {
+          "$kind": "Microsoft.TraceActivity",
+          "$designer": {
+            "id": "MGMmNZ"
+          },
+          "name": "OnTangent",
+          "label": "Tangent",
+          "valueType": "Tanget"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "k5CSN7"
+          },
+          "activityProcessed": true,
+          "dialog": "Tangent"
+        }
+      ],
+      "condition": true
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "zZdFT7",
+        "name": "TangentSkill"
+      },
+      "intent": "TangentSkill",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "9kRSBn"
+          },
+          "activityProcessed": true,
+          "dialog": "TangentSkill"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnUnknownIntent",
+      "$designer": {
+        "id": "OTY478"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "3re0fZ"
+          },
+          "activity": "${SendActivity_3re0fZ()}"
+        }
+      ]
+    }
+  ],
+  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",
+  "generator": "emptyBot.lg",
+  "id": "emptyBot",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": [
+      {
+        "intent": "Skill",
+        "pattern": "skill"
+      },
+      {
+        "intent": "TangentDialog",
+        "pattern": "tangent"
+      },
+      {
+        "intent": "TangentSkill",
+        "pattern": "tangentskill"
+      }
+    ]
+  }
+}

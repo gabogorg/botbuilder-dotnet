@@ -312,7 +312,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Bot.Builder.Runti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Bot.Builder.Integration.Runtime.Tests", "tests\integration\Microsoft.Bot.Builder.Integration.Runtime.Tests\Microsoft.Bot.Builder.Integration.Runtime.Tests.csproj", "{88383444-A2CC-4AC3-97A1-0F3E60D0E085}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratorsTests", "GeneratorsTests", "{6286BD10-ED3A-4FE3-A473-67D57F4DC20F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ComposerTests", "ComposerTests", "{6286BD10-ED3A-4FE3-A473-67D57F4DC20F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConversationalCoreTest", "FunctionalTests\ComposerTests\ConversationalCoreTest\ConversationalCoreTest.csproj", "{7142DC6C-7864-4A75-B553-F2770F3E59F9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interruptions", "FunctionalTests\ComposerTests\Interruptions\Interruptions.csproj", "{C87DACEE-4351-442A-B924-9D81C89B56D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1146,6 +1150,22 @@ Global
 		{88383444-A2CC-4AC3-97A1-0F3E60D0E085}.Release|Any CPU.Build.0 = Release|Any CPU
 		{88383444-A2CC-4AC3-97A1-0F3E60D0E085}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
 		{88383444-A2CC-4AC3-97A1-0F3E60D0E085}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
+		{C87DACEE-4351-442A-B924-9D81C89B56D6}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1282,6 +1302,8 @@ Global
 		{8082A916-21C3-4EEF-A5D6-39049AED95FD} = {4269F3C3-6B42-419B-B64A-3E6DC0F1574A}
 		{88383444-A2CC-4AC3-97A1-0F3E60D0E085} = {0A0E26B0-7A46-4F1A-8BFE-9A763FDF6CF8}
 		{6286BD10-ED3A-4FE3-A473-67D57F4DC20F} = {8667F820-8ADA-4498-91AE-AE95DEE5227E}
+		{7142DC6C-7864-4A75-B553-F2770F3E59F9} = {6286BD10-ED3A-4FE3-A473-67D57F4DC20F}
+		{C87DACEE-4351-442A-B924-9D81C89B56D6} = {6286BD10-ED3A-4FE3-A473-67D57F4DC20F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7173C9F3-A7F9-496E-9078-9156E35D6E16}

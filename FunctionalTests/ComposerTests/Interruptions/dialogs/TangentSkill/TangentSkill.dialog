@@ -1,0 +1,38 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "AiXDdV",
+    "name": "TangentSkill",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "RBl2y2"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginSkill",
+          "$designer": {
+            "id": "SwWy9J"
+          },
+          "activityProcessed": true,
+          "botId": "=settings.MicrosoftAppId",
+          "skillHostEndpoint": "=settings.skillHostEndpoint",
+          "connectionName": "=settings.connectionName",
+          "allowInterruptions": true,
+          "skillEndpoint": "=settings.skill['echoSkillBotDotNet'].endpointUrl",
+          "skillAppId": "=settings.skill['echoSkillBotDotNet'].msAppId"
+        }
+      ]
+    }
+  ],
+  "generator": "TangentSkill.lg",
+  "recognizer": "TangentSkill.lu.qna",
+  "id": "TangentSkill"
+}

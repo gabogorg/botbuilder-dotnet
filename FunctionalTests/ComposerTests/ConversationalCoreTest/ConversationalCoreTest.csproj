@@ -11,8 +11,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
-    <ProjectReference Include="..\..\..\libraries\integration\Microsoft.Bot.Builder.Integration.Runtime\Microsoft.Bot.Builder.Integration.Runtime.csproj" />
     <PackageReference Include="Microsoft.Bot.Components.HelpAndCancel" Version="1.0.0-preview.20210317.08f5da3" />
     <PackageReference Include="Microsoft.Bot.Components.Welcome" Version="1.0.0-preview.20210318.fd6fdd4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\libraries\Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime\Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 {
   "$kind": "Microsoft.AdaptiveDialog",
   "$designer": {
-    "id": "AiXDdV",
+    "id": "hwKKha",
     "name": "TangentSkill",
     "description": ""
   },
@@ -13,13 +13,20 @@
       "$designer": {
         "name": "BeginDialog",
         "description": "",
-        "id": "RBl2y2"
+        "id": "sYqJur"
       },
       "actions": [
         {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "DRmK8F"
+          },
+          "activity": "${SendActivity_DRmK8F()}"
+        },
+        {
           "$kind": "Microsoft.BeginSkill",
           "$designer": {
-            "id": "SwWy9J"
+            "id": "ELVkVm"
           },
           "activityProcessed": true,
           "botId": "=settings.MicrosoftAppId",
@@ -27,7 +34,8 @@
           "connectionName": "=settings.connectionName",
           "allowInterruptions": true,
           "skillEndpoint": "=settings.skill['echoSkillBotDotNet'].endpointUrl",
-          "skillAppId": "=settings.skill['echoSkillBotDotNet'].msAppId"
+          "skillAppId": "=settings.skill['echoSkillBotDotNet'].msAppId",
+          "activity": "${BeginSkill_Activity_ELVkVm()}"
         }
       ]
     }

@@ -1,1 +1,11 @@
 [import](common.lg)
+
+# BeginSkill_Activity_ELVkVm()
+[Activity
+    Text = Start echo
+]
+
+# SendActivity_DRmK8F()
+[Activity
+    Text = In Tangent Skill Dialog
+]

@@ -1,0 +1,15 @@
+[import](common.lg)
+
+# SendActivity_Welcome
+- ${WelcomeUser()}
+
+# SendActivity_QcyV4H()
+[Activity
+    Text = Sorry, didn't get that
+]
+
+# BeginSkill_Activity_2luER7()
+[Activity
+    Type = event
+    Name = Cards
+]

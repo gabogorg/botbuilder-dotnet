@@ -1,7 +1,7 @@
 {
   "$kind": "Microsoft.AdaptiveDialog",
   "$designer": {
-    "id": "P3F8uv",
+    "id": "cBBR45",
     "name": "TangentDialog",
     "description": ""
   },
@@ -13,22 +13,30 @@
       "$designer": {
         "name": "BeginDialog",
         "description": "",
-        "id": "8TFCJp"
+        "id": "VVgbok"
       },
       "actions": [
         {
           "$kind": "Microsoft.TextInput",
           "$designer": {
-            "id": "9CiOIR"
+            "id": "CONHAD"
           },
           "disabled": false,
           "maxTurnCount": 3,
           "alwaysPrompt": false,
           "allowInterruptions": false,
-          "prompt": "${TextInput_Prompt_9CiOIR()}",
           "unrecognizedPrompt": "",
           "invalidPrompt": "",
-          "defaultValueResponse": ""
+          "defaultValueResponse": "",
+          "prompt": "${TextInput_Prompt_CONHAD()}",
+          "property": "dialog.UserResponse"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "C4eUg3"
+          },
+          "activity": "${SendActivity_C4eUg3()}"
         }
       ]
     }

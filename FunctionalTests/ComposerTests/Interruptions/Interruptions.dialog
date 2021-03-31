@@ -1,11 +1,9 @@
 {
   "$kind": "Microsoft.AdaptiveDialog",
   "$designer": {
-    "$designer": {
-      "name": "Interruptions",
-      "description": "",
-      "id": "ccfaI3"
-    }
+    "name": "Interruptions",
+    "description": "",
+    "id": "A79tBe"
   },
   "autoEndDialog": true,
   "defaultResultProperty": "dialog.result",
@@ -49,7 +47,7 @@
     {
       "$kind": "Microsoft.OnIntent",
       "$designer": {
-        "id": "5Ha3Tk",
+        "id": "000utm",
         "name": "Skill"
       },
       "intent": "Skill",
@@ -57,7 +55,7 @@
         {
           "$kind": "Microsoft.BeginSkill",
           "$designer": {
-            "id": "v0SSAi"
+            "id": "2luER7"
           },
           "activityProcessed": true,
           "botId": "=settings.MicrosoftAppId",
@@ -66,42 +64,32 @@
           "allowInterruptions": true,
           "skillEndpoint": "=settings.skill['waterfallSkillBotDotNet'].endpointUrl",
           "skillAppId": "=settings.skill['waterfallSkillBotDotNet'].msAppId",
-          "activity": "${BeginSkill_Activity_v0SSAi()}"
+          "activity": "${BeginSkill_Activity_2luER7()}"
         }
       ]
     },
     {
       "$kind": "Microsoft.OnIntent",
       "$designer": {
-        "id": "CFPzjV",
+        "id": "t83H88",
         "name": "TangentDialog"
       },
       "intent": "TangentDialog",
       "actions": [
         {
-          "$kind": "Microsoft.TraceActivity",
-          "$designer": {
-            "id": "MGMmNZ"
-          },
-          "name": "OnTangent",
-          "label": "Tangent",
-          "valueType": "Tanget"
-        },
-        {
           "$kind": "Microsoft.BeginDialog",
           "$designer": {
-            "id": "k5CSN7"
+            "id": "vltYeA"
           },
           "activityProcessed": true,
-          "dialog": "Tangent"
+          "dialog": "TangentDialog"
         }
-      ],
-      "condition": true
+      ]
     },
     {
       "$kind": "Microsoft.OnIntent",
       "$designer": {
-        "id": "zZdFT7",
+        "id": "Fy34yY",
         "name": "TangentSkill"
       },
       "intent": "TangentSkill",
@@ -109,7 +97,7 @@
         {
           "$kind": "Microsoft.BeginDialog",
           "$designer": {
-            "id": "9kRSBn"
+            "id": "L715Xu"
           },
           "activityProcessed": true,
           "dialog": "TangentSkill"
@@ -119,22 +107,21 @@
     {
       "$kind": "Microsoft.OnUnknownIntent",
       "$designer": {
-        "id": "OTY478"
+        "id": "2unkxH"
       },
       "actions": [
         {
           "$kind": "Microsoft.SendActivity",
           "$designer": {
-            "id": "3re0fZ"
+            "id": "QcyV4H"
           },
-          "activity": "${SendActivity_3re0fZ()}"
+          "activity": "${SendActivity_QcyV4H()}"
         }
       ]
     }
   ],
-  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",
-  "generator": "emptyBot.lg",
-  "id": "emptyBot",
+  "generator": "Interruptions.lg",
+  "id": "Interruptions",
   "recognizer": {
     "$kind": "Microsoft.RegexRecognizer",
     "intents": [
@@ -144,11 +131,11 @@
       },
       {
         "intent": "TangentDialog",
-        "pattern": "tangent"
+        "pattern": "dialog"
       },
       {
         "intent": "TangentSkill",
-        "pattern": "tangentskill"
+        "pattern": "banana"
       }
     ]
   }

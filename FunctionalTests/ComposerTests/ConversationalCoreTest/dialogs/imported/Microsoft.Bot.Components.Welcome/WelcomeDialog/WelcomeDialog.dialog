@@ -3,7 +3,7 @@
   "$designer": {
     "$designer": {
       "name": "WelcomeDialog",
-      "description": "",
+      "description": "Greets new and returning users",
       "id": "8pOkoq"
     },
     "name": "WelcomeDialog"
@@ -58,5 +58,5 @@
   "generator": "WelcomeDialog.lg",
   "id": "WelcomeDialog",
   "recognizer": "WelcomeDialog.lu.qna",
-  "$Imported": "13b03f7f2e0aaa7d111a000b24e248ed"
+  "$Imported": "bfbbf56484d01ee86d5533b679abeaa5"
 }

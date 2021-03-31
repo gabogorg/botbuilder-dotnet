@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Bot.Builder.Integration.Runtime.Extensions;
+using Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,7 +11,7 @@ namespace ConversationalCoreTest
     {
         public Startup(IConfiguration configuration)
         {
-            this.Configuration = configuration;
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -20,7 +20,7 @@ namespace ConversationalCoreTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
-            services.AddBotRuntime(this.Configuration);
+            services.AddBotRuntime(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,7 +30,7 @@ namespace ConversationalCoreTest
             {
                 app.UseDeveloperExceptionPage();
             }
-        
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseWebSockets();

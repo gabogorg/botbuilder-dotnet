@@ -1,3 +1,12 @@
+
+> LUIS application information
+> !# @app.versionId = 0.1
+> !# @app.culture = en-us
+> !# @app.luis_schema_version = 3.2.0
+
+
+> # Intent definitions
+
 # Cancel
 - cancel
 - quit
@@ -8,6 +17,7 @@
 - just stop already
 - end this now
 
+
 # Help
 - help
 - im stuck
@@ -16,6 +26,7 @@
 - what can you help me with
 - i need help
 - i need some assistance
+
 
 # None
 - where is my car?
@@ -26,3 +37,19 @@
 - check my account balance
 - do unicorns really exist
 - duck
+
+
+> # Entity definitions
+
+
+> # PREBUILT Entity definitions
+
+
+> # Phrase list definitions
+
+
+> # List entities
+
+> # RegEx entities
+
+

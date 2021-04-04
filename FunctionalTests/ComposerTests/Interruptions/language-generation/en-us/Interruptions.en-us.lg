@@ -1,15 +1,10 @@
 [import](common.lg)
 
-# SendActivity_Welcome
-- ${WelcomeUser()}
+# SendActivity_Welcome()
+- ${WelcomeUser()}. \r\nSkill starts the waterfall skill (Cards). \r\nBanana starts the echo skill. \r\nDialog starts tangent DialogA\r\nPineapple starts tangent DialogB.
 
 # SendActivity_QcyV4H()
 [Activity
     Text = Sorry, didn't get that
 ]
 
-# BeginSkill_Activity_2luER7()
-[Activity
-    Type = event
-    Name = Cards
-]

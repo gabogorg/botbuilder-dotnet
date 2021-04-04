@@ -48,23 +48,17 @@
       "$kind": "Microsoft.OnIntent",
       "$designer": {
         "id": "000utm",
-        "name": "Skill"
+        "name": "SkillA (Cards)"
       },
-      "intent": "Skill",
+      "intent": "SkillACards",
       "actions": [
         {
-          "$kind": "Microsoft.BeginSkill",
+          "$kind": "Microsoft.BeginDialog",
           "$designer": {
-            "id": "2luER7"
+            "id": "riDWue"
           },
           "activityProcessed": true,
-          "botId": "=settings.MicrosoftAppId",
-          "skillHostEndpoint": "=settings.skillHostEndpoint",
-          "connectionName": "=settings.connectionName",
-          "allowInterruptions": true,
-          "skillEndpoint": "=settings.skill['waterfallSkillBotDotNet'].endpointUrl",
-          "skillAppId": "=settings.skill['waterfallSkillBotDotNet'].msAppId",
-          "activity": "${BeginSkill_Activity_2luER7()}"
+          "dialog": "SkillA"
         }
       ]
     },
@@ -72,9 +66,9 @@
       "$kind": "Microsoft.OnIntent",
       "$designer": {
         "id": "t83H88",
-        "name": "TangentDialog"
+        "name": "DialogA"
       },
-      "intent": "TangentDialog",
+      "intent": "DialogA",
       "actions": [
         {
           "$kind": "Microsoft.BeginDialog",
@@ -90,16 +84,16 @@
       "$kind": "Microsoft.OnIntent",
       "$designer": {
         "id": "Fy34yY",
-        "name": "TangentSkill"
+        "name": "SkillB (Echo)"
       },
-      "intent": "TangentSkill",
+      "intent": "SkillBEcho",
       "actions": [
         {
           "$kind": "Microsoft.BeginDialog",
           "$designer": {
             "id": "L715Xu"
           },
-          "activityProcessed": true,
+          "activityProcessed": false,
           "dialog": "TangentSkill"
         }
       ]
@@ -118,6 +112,24 @@
           "activity": "${SendActivity_QcyV4H()}"
         }
       ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "HVhLPz",
+        "name": "DialogB"
+      },
+      "intent": "DialogB",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "pQMAij"
+          },
+          "activityProcessed": true,
+          "dialog": "TangentDialog2"
+        }
+      ]
     }
   ],
   "generator": "Interruptions.lg",
@@ -126,16 +138,20 @@
     "$kind": "Microsoft.RegexRecognizer",
     "intents": [
       {
-        "intent": "Skill",
+        "intent": "SkillACards",
         "pattern": "skill"
       },
       {
-        "intent": "TangentDialog",
+        "intent": "DialogA",
         "pattern": "dialog"
       },
       {
-        "intent": "TangentSkill",
+        "intent": "SkillBEcho",
         "pattern": "banana"
+      },
+      {
+        "intent": "DialogB",
+        "pattern": "pineapple"
       }
     ]
   }

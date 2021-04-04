@@ -7,5 +7,10 @@
 
 # SendActivity_DRmK8F()
 [Activity
-    Text = In Tangent Skill Dialog
+    Text = Calling SkillB (Echo)
+]
+
+# SendActivity_7mvPye()
+[Activity
+    Text = Done with SkillB (Echo)
 ]

@@ -2,10 +2,11 @@
 
 # TextInput_Prompt_CONHAD()
 [Activity
-    Text = Say something
+    Text = Say something for DialogA
 ]
 
 # SendActivity_C4eUg3()
 [Activity
-    Text = ${dialog.UserResponse}
+    Text = DialogA got: ${dialog.UserResponse}
 ]
+

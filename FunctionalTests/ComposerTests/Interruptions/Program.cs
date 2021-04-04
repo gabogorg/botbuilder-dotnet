@@ -19,9 +19,7 @@ namespace Interruptions
                 {
                     var applicationRoot = AppDomain.CurrentDomain.BaseDirectory;
                     var settingsDirectory = "settings";
-
-                    builder.AddBotRuntimeConfiguration(applicationRoot, settingsDirectory);
-
+                    builder.AddBotRuntimeConfiguration(hostingContext, applicationRoot, settingsDirectory);
                     builder.AddCommandLine(args);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>

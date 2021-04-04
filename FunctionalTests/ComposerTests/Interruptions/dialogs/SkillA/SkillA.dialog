@@ -1,8 +1,8 @@
 {
   "$kind": "Microsoft.AdaptiveDialog",
   "$designer": {
-    "id": "hwKKha",
-    "name": "SkillB (Echo)",
+    "id": "Ul0Lj2",
+    "name": "SkillA (Cards)",
     "description": ""
   },
   "autoEndDialog": true,
@@ -13,41 +13,41 @@
       "$designer": {
         "name": "BeginDialog",
         "description": "",
-        "id": "sYqJur"
+        "id": "ngD6Ku"
       },
       "actions": [
         {
           "$kind": "Microsoft.SendActivity",
           "$designer": {
-            "id": "DRmK8F"
+            "id": "tPdfHU"
           },
-          "activity": "${SendActivity_DRmK8F()}"
+          "activity": "${SendActivity_tPdfHU()}"
         },
         {
           "$kind": "Microsoft.BeginSkill",
           "$designer": {
-            "id": "ELVkVm"
+            "id": "qPuJ6O"
           },
           "activityProcessed": true,
           "botId": "=settings.MicrosoftAppId",
           "skillHostEndpoint": "=settings.skillHostEndpoint",
           "connectionName": "=settings.connectionName",
           "allowInterruptions": true,
-          "skillEndpoint": "=settings.skill['echoSkillBotDotNet'].endpointUrl",
-          "skillAppId": "=settings.skill['echoSkillBotDotNet'].msAppId",
-          "activity": "${BeginSkill_Activity_ELVkVm()}"
+          "skillEndpoint": "=settings.skill['waterfallSkillBotDotNet'].endpointUrl",
+          "skillAppId": "=settings.skill['waterfallSkillBotDotNet'].msAppId",
+          "activity": "${BeginSkill_Activity_qPuJ6O()}"
         },
         {
           "$kind": "Microsoft.SendActivity",
           "$designer": {
-            "id": "7mvPye"
+            "id": "Kpa0zR"
           },
-          "activity": "${SendActivity_7mvPye()}"
+          "activity": "${SendActivity_Kpa0zR()}"
         }
       ]
     }
   ],
-  "generator": "TangentSkill.lg",
-  "recognizer": "TangentSkill.lu.qna",
-  "id": "TangentSkill"
+  "generator": "SkillA.lg",
+  "recognizer": "SkillA.lu.qna",
+  "id": "SkillA"
 }

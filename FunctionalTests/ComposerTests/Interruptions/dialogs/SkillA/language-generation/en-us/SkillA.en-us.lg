@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# BeginSkill_Activity_qPuJ6O()
+[Activity
+    Type = event
+    Name = Cards
+]
+# SendActivity_tPdfHU()
+[Activity
+    Text = Calling SkillA (Cards)
+]
+
+# SendActivity_Kpa0zR()
+[Activity
+    Text = Done with SkillA (Cards)
+]

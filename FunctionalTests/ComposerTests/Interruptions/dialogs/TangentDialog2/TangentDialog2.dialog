@@ -1,8 +1,8 @@
 {
   "$kind": "Microsoft.AdaptiveDialog",
   "$designer": {
-    "id": "cBBR45",
-    "name": "DialogA",
+    "id": "V81VGp",
+    "name": "DialogB",
     "description": ""
   },
   "autoEndDialog": true,
@@ -13,34 +13,34 @@
       "$designer": {
         "name": "BeginDialog",
         "description": "",
-        "id": "VVgbok"
+        "id": "nz0Pct"
       },
       "actions": [
         {
           "$kind": "Microsoft.TextInput",
           "$designer": {
-            "id": "CONHAD"
+            "id": "UOY8lV"
           },
           "disabled": false,
           "maxTurnCount": 3,
           "alwaysPrompt": false,
           "allowInterruptions": true,
+          "prompt": "${TextInput_Prompt_UOY8lV()}",
           "unrecognizedPrompt": "",
           "invalidPrompt": "",
-          "prompt": "${TextInput_Prompt_CONHAD()}",
           "property": "dialog.UserResponse"
         },
         {
           "$kind": "Microsoft.SendActivity",
           "$designer": {
-            "id": "C4eUg3"
+            "id": "2q0JTX"
           },
-          "activity": "${SendActivity_C4eUg3()}"
+          "activity": "${SendActivity_2q0JTX()}"
         }
       ]
     }
   ],
-  "generator": "TangentDialog.lg",
-  "recognizer": "TangentDialog.lu.qna",
-  "id": "TangentDialog"
+  "generator": "TangentDialog2.lg",
+  "recognizer": "TangentDialog2.lu.qna",
+  "id": "TangentDialog2"
 }

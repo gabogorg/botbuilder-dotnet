@@ -1,0 +1,12 @@
+[import](common.lg)
+
+# TextInput_Prompt_UOY8lV()
+[Activity
+    Text = Say something for DialogB
+]
+
+# SendActivity_2q0JTX()
+[Activity
+    Text = DialogB got: ${dialog.UserResponse}
+]
+

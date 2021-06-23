@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schemas.botframework.com/schemas/component/v1.0/component.schema",
+    "$role": [],
+    "title": "Functional Test script",
+    "description": "Defines a sequence of test actions to perform to validate the behavior of a bot.",
+    "type": "object",
+    "properties": {
+        "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the test script"
+        },
+        "script": {
+            "type": "array",
+            "title": "Test actions",
+            "description": "Sequence of test actions to execute.",
+            "items": {
+                "$kind": "Microsoft.Test.ITestAction"
+            }
+        }
+    },
+    "required": [
+        "script"
+    ]
+}

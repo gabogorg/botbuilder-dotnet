@@ -251,24 +251,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Composer", "Composer", "{39
 		FunctionalTests\SkillsTests\Skills\Composer\Directory.Build.props = FunctionalTests\SkillsTests\Skills\Composer\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleHostBotComposer", "SimpleHostBotComposer", "{6F444201-6536-46A8-9635-8C1C3D5606A4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "runtime", "runtime", "{00DF69AD-7FC9-4798-A5B6-EA734FB6F8F8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{86E3734B-3B43-4AC6-9E99-A6E8CAB84AE8}"
-	ProjectSection(SolutionItems) = preProject
-		FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\settings\appsettings.Development.json = FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\settings\appsettings.Development.json
-		FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\settings\appsettings.json = FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\settings\appsettings.json
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.BotFramework.Composer.Core", "FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\runtime\core\Microsoft.BotFramework.Composer.Core.csproj", "{81534D3F-0D18-469F-B442-7BBD71928429}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.BotFramework.Composer.CustomAction", "FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\runtime\customaction\Microsoft.BotFramework.Composer.CustomAction.csproj", "{3BD794BB-199B-4D4F-AA32-4D832C24C950}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.BotFramework.Composer.Functions", "FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\runtime\azurefunctions\Microsoft.BotFramework.Composer.Functions.csproj", "{483ACD10-548C-47F1-8389-823F2F62249C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.BotFramework.Composer.WebApp", "FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\runtime\azurewebapp\Microsoft.BotFramework.Composer.WebApp.csproj", "{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{C5C14DE2-7606-431D-BDCB-5216A15F61CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Parsers", "Parsers", "{20B16B63-1572-4478-A6E3-29F3B2388A53}"
@@ -301,6 +283,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Tests", "tests\Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Tests\Microsoft.Bot.Builder.Dialogs.Adaptive.Runtime.Tests.csproj", "{E3E6EE58-A578-4C8E-A763-9452242F1627}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EchoSkillBotComposer", "FunctionalTests\SkillsTests\Skills\Composer\EchoSkillBotComposer\EchoSkillBotComposer.csproj", "{C4BD0BA3-6977-4CAC-ABD2-7FA0D323DF3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleHostBotComposer", "FunctionalTests\SkillsTests\Consumers\Composer\SimpleHostBotComposer\SimpleHostBotComposer.csproj", "{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -990,38 +974,6 @@ Global
 		{B377C1E7-1B9E-4C97-B0C5-E0128D0BFC88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B377C1E7-1B9E-4C97-B0C5-E0128D0BFC88}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
 		{B377C1E7-1B9E-4C97-B0C5-E0128D0BFC88}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
-		{81534D3F-0D18-469F-B442-7BBD71928429}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
-		{483ACD10-548C-47F1-8389-823F2F62249C}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
 		{0DDF468F-9BA8-423E-8AFA-D6CAF368F105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0DDF468F-9BA8-423E-8AFA-D6CAF368F105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DDF468F-9BA8-423E-8AFA-D6CAF368F105}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
@@ -1110,6 +1062,14 @@ Global
 		{C4BD0BA3-6977-4CAC-ABD2-7FA0D323DF3C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4BD0BA3-6977-4CAC-ABD2-7FA0D323DF3C}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
 		{C4BD0BA3-6977-4CAC-ABD2-7FA0D323DF3C}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Debug-Windows|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Debug-Windows|Any CPU.Build.0 = Debug|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Release-Windows|Any CPU.ActiveCfg = Release|Any CPU
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5}.Release-Windows|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1218,13 +1178,6 @@ Global
 		{B377C1E7-1B9E-4C97-B0C5-E0128D0BFC88} = {842C4AF5-56E4-40FF-8F25-66E2A1C162DA}
 		{C141B474-BE1D-4E7F-89FF-66211A830588} = {DCD2CEDB-3B23-4DB8-A798-F0D5CD4E168E}
 		{399DAB0E-088A-4EE3-BE03-10187C8F91E4} = {628AD6E5-66DA-44B2-9A29-867C62880879}
-		{6F444201-6536-46A8-9635-8C1C3D5606A4} = {C141B474-BE1D-4E7F-89FF-66211A830588}
-		{00DF69AD-7FC9-4798-A5B6-EA734FB6F8F8} = {6F444201-6536-46A8-9635-8C1C3D5606A4}
-		{86E3734B-3B43-4AC6-9E99-A6E8CAB84AE8} = {6F444201-6536-46A8-9635-8C1C3D5606A4}
-		{81534D3F-0D18-469F-B442-7BBD71928429} = {00DF69AD-7FC9-4798-A5B6-EA734FB6F8F8}
-		{3BD794BB-199B-4D4F-AA32-4D832C24C950} = {00DF69AD-7FC9-4798-A5B6-EA734FB6F8F8}
-		{483ACD10-548C-47F1-8389-823F2F62249C} = {00DF69AD-7FC9-4798-A5B6-EA734FB6F8F8}
-		{B3D32C7C-817A-4E1A-AEF7-2307DDF62DB5} = {00DF69AD-7FC9-4798-A5B6-EA734FB6F8F8}
 		{C5C14DE2-7606-431D-BDCB-5216A15F61CC} = {AD743B78-D61F-4FBF-B620-FA83CE599A50}
 		{20B16B63-1572-4478-A6E3-29F3B2388A53} = {AD743B78-D61F-4FBF-B620-FA83CE599A50}
 		{0DDF468F-9BA8-423E-8AFA-D6CAF368F105} = {C5C14DE2-7606-431D-BDCB-5216A15F61CC}
@@ -1240,6 +1193,7 @@ Global
 		{80F0A6D3-C7C4-4C7E-B118-97BCCB686358} = {4269F3C3-6B42-419B-B64A-3E6DC0F1574A}
 		{E3E6EE58-A578-4C8E-A763-9452242F1627} = {AD743B78-D61F-4FBF-B620-FA83CE599A50}
 		{C4BD0BA3-6977-4CAC-ABD2-7FA0D323DF3C} = {399DAB0E-088A-4EE3-BE03-10187C8F91E4}
+		{CDA5DA47-D6F5-4756-8AE8-EF821ADE73B5} = {C141B474-BE1D-4E7F-89FF-66211A830588}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7173C9F3-A7F9-496E-9078-9156E35D6E16}
